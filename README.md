@@ -17,6 +17,11 @@ The data used "Salary.csv" is from HR web-based desktop system that contains inf
 - Excel for data Assessment
 - R for data manipualtion and data modeling
 
+## Exploratory Data Analysis
+
+- Data Summmary
+![Data Summary](https://github.com/user-attachments/assets/709f68a7-9126-4d83-8eb2-66830b53045d)
+The summary statistics has enabled us to know the measures of central tendency (Mean, Median, Mode), measures of dispersion (Range, Variance, Standard Deviation, Interquartile Range) which are foundational for exploring, understanding the data.
 ## Data Preparation
 - Data Cleaning/Checking for errors
 ```R
