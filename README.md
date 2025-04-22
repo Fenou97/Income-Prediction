@@ -19,7 +19,7 @@ The data used "Salary.csv" is from HR web-based desktop system that contains inf
 
 ## Exploratory Data Analysis
 
-- Data Summmary and Data Distribution
+- ### Data Summmary and Data Distribution
 ![Data Summary](https://github.com/user-attachments/assets/709f68a7-9126-4d83-8eb2-66830b53045d)
 
 The summary statistics has enabled us to know the measures of central tendency (Mean, Median, Mode), measures of dispersion (Range, Variance, Standard Deviation, Interquartile Range) which are foundational for exploring, understanding the data.
@@ -30,7 +30,7 @@ The summary statistics has enabled us to know the measures of central tendency (
 
 We singled out some variables that are not normally distributed and can affect the model building phase. 
 
-- Correlation Analysis
+- ### Correlation Analysis
 ```R
 install.packages("corrplot")
 library(corrplot)
@@ -54,7 +54,7 @@ ggplot(Salary1, aes(x = Salary1$AnnualIncomeNeeded, y = Salary1$CurrentSalary)) 
 Through correlation analysis, we identified variables that are highly correlated to avoid multicollinearity in the model. For instance, the variables Years at the company and Years Current Role are  highly correlated. So we must include one of them in the model to avoid multicollinearity. On the other hand, the correlation analysis has helped identifying variables that are correlated with the target variable (Annual Income Needed). For example, there is a positive correlation between  Annual Income Needed (Target variable) and Current Salary. Variables highly correlated with the target variable are likely to be good predictors. Identifying them will help prioritize which features to include in the model.
 
 ## Data Preparation
-- Data Cleaning/Checking for errors
+- ### Data Cleaning/Checking for errors
 ```R
 num_duplicates <- sum(duplicated(Salary1))
 > print(num_duplicates)
@@ -65,7 +65,7 @@ num_duplicates <- sum(duplicated(Salary1))
 ```
 The data is free from duplicated values and missing values
 
-- Data Cleaning/ Fix Data Types
+- ### Data Cleaning/ Fix Data Types
 
 From the data structure above, we see that the variables Annual Income Needed, Current Salary and Difference from Salary are stored as character and need to be converted to the appropriate data type for our analysis.
 ```R
@@ -101,7 +101,7 @@ Salary$AnnualIncomeNeeded <- as.numeric(Salary$AnnualIncomeNeeded)
 Salary$DiffFromSalary <- as.numeric(Salary$DiffFromSalary)
 Salary$CurrentSalary <- as.numeric(Salary$CurrentSalary)
 ```
-- Data Cleaning/Normality
+- ### Data Cleaning/Normality
 
 We used Log Transformation technique to normalize the variable “Diff from Salary” that was first right skewed.
 ```R
@@ -109,6 +109,8 @@ Salary$DiffFromSalary <- log(Salary$DiffFromSalary)
 Salary$DiffFromSalary <- log(Salary$AnnualIncomeNeeded)
 ```
 ![Data Normality](https://github.com/user-attachments/assets/f685a13e-3254-4d35-83cc-15a748435f98)
+
+## Model Buidling Plan
 
   
   
