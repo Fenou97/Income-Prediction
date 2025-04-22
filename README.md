@@ -28,7 +28,7 @@ The summary statistics has enabled us to know the measures of central tendency (
 
 ![Data Visualization 2](https://github.com/user-attachments/assets/adc0536f-b646-4e02-be51-4c598bbd197a)
 
-Through the descriptive statistics, we singled out some variables that are not normally distributed and can affect the model building phase. 
+We singled out some variables that are not normally distributed and can affect the model building phase. 
 
 
 ## Data Preparation
