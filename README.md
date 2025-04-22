@@ -1,4 +1,4 @@
-# Monthly Income Prediction
+# Annual Income Prediction
 
 ## Project Overview
 
