@@ -19,9 +19,18 @@ The data used "Salary.csv" is from HR web-based desktop system that contains inf
 
 ## Exploratory Data Analysis
 
-- Data Summmary
+- Data Summmary and Data Distribution
 ![Data Summary](https://github.com/user-attachments/assets/709f68a7-9126-4d83-8eb2-66830b53045d)
+
 The summary statistics has enabled us to know the measures of central tendency (Mean, Median, Mode), measures of dispersion (Range, Variance, Standard Deviation, Interquartile Range) which are foundational for exploring, understanding the data.
+  
+![Data Visualization](https://github.com/user-attachments/assets/45bd0540-afbf-4360-bb03-58a19ffb1869)
+
+![Data Visualization 2](https://github.com/user-attachments/assets/adc0536f-b646-4e02-be51-4c598bbd197a)
+
+Through the descriptive statistics, we singled out some variables that are not normally distributed and can affect the model building phase. 
+
+
 ## Data Preparation
 - Data Cleaning/Checking for errors
 ```R
@@ -77,7 +86,7 @@ We used Log Transformation technique to normalize the variable “Diff from Sala
 Salary$DiffFromSalary <- log(Salary$DiffFromSalary) 
 Salary$DiffFromSalary <- log(Salary$AnnualIncomeNeeded)
 ```
-  ![Data Normality](https://github.com/user-attachments/assets/f685a13e-3254-4d35-83cc-15a748435f98)
+![Data Normality](https://github.com/user-attachments/assets/f685a13e-3254-4d35-83cc-15a748435f98)
 
   
   
