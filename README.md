@@ -30,6 +30,28 @@ The summary statistics has enabled us to know the measures of central tendency (
 
 We singled out some variables that are not normally distributed and can affect the model building phase. 
 
+- Correlation Analysis
+```R
+install.packages("corrplot")
+library(corrplot)
+corr_matrix <- cor(Salary)
+corrplot(corr_matrix, method = "color", type = "upper", tl.col = "black")
+```
+![Correlation Matrix](https://github.com/user-attachments/assets/246c8734-8f69-42e2-9621-12ca8cf1fd56)
+
+```R
+install.packages("ggplot2")
+library(ggplot2)
+ggplot(Salary1, aes(x = Salary1$AnnualIncomeNeeded, y = Salary1$CurrentSalary)) +
+  geom_point() +
+  geom_smooth(method = "lm", col = "blue") +
+  labs(title = "Scatterplot with Trendline")
+```
+![Correlation 1](https://github.com/user-attachments/assets/4c59aa12-5c68-4fc6-914f-4edba5674706)
+![Correlation 2](https://github.com/user-attachments/assets/70e29231-bda9-4098-8d92-fe91cdb21d27)
+![Correlation 3](https://github.com/user-attachments/assets/a124f2bc-f771-41d0-b5aa-7d1dabb5bf30)
+
+Through correlation analysis, we identified variables that are highly correlated to avoid multicollinearity in the model. For instance, the variables Years at the company and Years Current Role are  highly correlated. So we must include one of them in the model to avoid multicollinearity. On the other hand, the correlation analysis has helped identifying variables that are correlated with the target variable (Annual Income Needed). For example, there is a positive correlation between  Annual Income Needed (Target variable) and Current Salary. Variables highly correlated with the target variable are likely to be good predictors. Identifying them will help prioritize which features to include in the model.
 
 ## Data Preparation
 - Data Cleaning/Checking for errors
