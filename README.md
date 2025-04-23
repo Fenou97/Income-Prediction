@@ -135,5 +135,6 @@ print(vif_values)
 ```
 ![Variance Indicator factor](https://github.com/user-attachments/assets/55423de8-5408-4bd7-abd9-a52c67e4dc0d)
 
+We have typically removed features with high VIF (Variance Inflation Factor), as these indicate multicollinearity. A common threshold to flag high multicollinearity is a VIF greater than 5 or 10. PercentSalaryHike: VIF = 7.25 (indicates potential multicollinearity), TotalWorkingYears: VIF = 4.82 (moderate, but could be considered for further inspection), YearsAtCompany: VIF = 4.48 (moderate), YearsInCurrentRole: VIF = 2.68 (moderate, but not concerning), YearsWithCurrManager: VIF = 2.77 (moderate), DiffFromSalary: VIF = 12.49 (high and suggests significant multicollinearity), CurrentSalary: VIF = 9.62 (high and suggests significant multicollinearity). By eliminating irrelevant features, the model is likely to become simpler and less prone to overfitting, improving generalization to unseen data. Fewer predictors can lead to better predictive performance.
   
   
