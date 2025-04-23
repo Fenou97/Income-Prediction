@@ -114,6 +114,18 @@ Salary$DiffFromSalary <- log(Salary$AnnualIncomeNeeded)
 
 Linear regression, which is supervised machine learning algorithm is used for predicting the desire income (continuous dependent variable) based on one or more independent variables (predictors) in the data set.
 
+- ### First Preliminarry Model: with all the variables in the data set
+
+```R
+model <- lm(AnnualIncomeNeeded ~., data = Salary)
+summary(model)
+```
+![First Model with all variables](https://github.com/user-attachments/assets/035a77cf-e738-4bb8-a6a9-d2b3490cfc6f)
+
+The model outputs are red flag for biases and non-linearity in the dataset. The results of the model reveals that there are too many predictors in the dataset, what is true. With too many features, the data points become sparse making it harder to find meaningful relationships. The model appears to have an extremely high goodness of fit, but it is likely overfitting . Residual Standard Error (RSE: 7.717e-11) is very close to zero, meaning the residuals (errors) are extremely small. R² of 1 means the model explains 100% of the variance in the dependent variable (too good to be true). A huge F-statistic (1.648e+31) with an extremely small p-value (<2.2e-16) suggests that at least one of the predictors is statistically significant. 
+
+![First Model Evaluation](https://github.com/user-attachments/assets/077ede83-0fb3-481c-8028-2242ec700be5)
+
 
 
   
