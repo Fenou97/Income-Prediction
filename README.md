@@ -126,7 +126,14 @@ The model outputs are red flag for biases and non-linearity in the dataset. The 
 
 ![First Model Evaluation](https://github.com/user-attachments/assets/077ede83-0fb3-481c-8028-2242ec700be5)
 
-
+- ### Applying Variance Inflation Factor to remove irrelevant factors
+```R
+install.packages("car")
+library(car)
+vif_values <- vif(model)
+print(vif_values)
+```
+![Variance Indicator factor](https://github.com/user-attachments/assets/55423de8-5408-4bd7-abd9-a52c67e4dc0d)
 
   
   
