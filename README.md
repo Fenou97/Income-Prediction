@@ -112,5 +112,9 @@ Salary$DiffFromSalary <- log(Salary$AnnualIncomeNeeded)
 
 ## Model Buidling Plan
 
+Linear regression, which is supervised machine learning algorithm is used for predicting the desire income (continuous dependent variable) based on one or more independent variables (predictors) in the data set.
+
+
+
   
   
