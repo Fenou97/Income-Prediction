@@ -117,14 +117,29 @@ Linear regression, which is supervised machine learning algorithm is used for pr
 - ### First Preliminarry Model: with all the variables in the data set
 
 ```R
+#Build the model
 model <- lm(AnnualIncomeNeeded ~., data = Salary)
 summary(model)
+
+#Model visualization
+install.packages("ggplot2")
+library(ggplot2)
+#Residuals vs. Fitted Values Plot
+plot(model$fitted.values, resid(model), 
+     main = "Residuals vs Fitted", 
+     xlab = "Fitted Values", ylab = "Residuals",
+     pch = 19, col = "red")
+abline(h = 0, col = "blue", lwd = 2)
+
+#QQ Plot (Normality of Residuals)
+qqnorm(resid(model), main = "QQ Plot of Residuals")
+qqline(resid(model), col = "blue", lwd = 2)
 ```
 ![First Model with all variables](https://github.com/user-attachments/assets/035a77cf-e738-4bb8-a6a9-d2b3490cfc6f)
 
-The model outputs are red flag for biases and non-linearity in the dataset. The results of the model reveals that there are too many predictors in the dataset, what is true. With too many features, the data points become sparse making it harder to find meaningful relationships. The model appears to have an extremely high goodness of fit, but it is likely overfitting . Residual Standard Error (RSE: 7.717e-11) is very close to zero, meaning the residuals (errors) are extremely small. R² of 1 means the model explains 100% of the variance in the dependent variable (too good to be true). A huge F-statistic (1.648e+31) with an extremely small p-value (<2.2e-16) suggests that at least one of the predictors is statistically significant. 
-
 ![First Model Evaluation](https://github.com/user-attachments/assets/077ede83-0fb3-481c-8028-2242ec700be5)
+
+The model outputs are red flag for biases and non-linearity in the dataset. The results of the model reveals that there are too many predictors in the dataset, what is true. With too many features, the data points become sparse making it harder to find meaningful relationships. The model appears to have an extremely high goodness of fit, but it is likely overfitting . Residual Standard Error (RSE: 7.717e-11) is very close to zero, meaning the residuals (errors) are extremely small. R² of 1 means the model explains 100% of the variance in the dependent variable (too good to be true). A huge F-statistic (1.648e+31) with an extremely small p-value (<2.2e-16) suggests that at least one of the predictors is statistically significant. 
 
 - ### Applying Variance Inflation Factor to remove irrelevant factors
 ```R
@@ -138,8 +153,8 @@ print(vif_values)
 We have typically removed features with high VIF (Variance Inflation Factor), as these indicate multicollinearity. A common threshold to flag high multicollinearity is a VIF greater than 5 or 10. PercentSalaryHike: VIF = 7.25 (indicates potential multicollinearity), TotalWorkingYears: VIF = 4.82 (moderate, but could be considered for further inspection), YearsAtCompany: VIF = 4.48 (moderate), YearsInCurrentRole: VIF = 2.68 (moderate, but not concerning), YearsWithCurrManager: VIF = 2.77 (moderate), DiffFromSalary: VIF = 12.49 (high and suggests significant multicollinearity), CurrentSalary: VIF = 9.62 (high and suggests significant multicollinearity). By eliminating irrelevant features, the model is likely to become simpler and less prone to overfitting, improving generalization to unseen data. Fewer predictors can lead to better predictive performance.
   
 - ### 2nd Model with relevant features
-Splitting the data into training data and testing data
 ```R
+#Splitting the data into training data and testing data
 install.packages("caret")
 library(caret)
 trainIndex <- createDataPartition(Salary$AnnualIncomeNeeded, p = 0.75, list = FALSE)
@@ -147,5 +162,21 @@ trainData <- Salary[trainIndex, ]
 testData <- Salary[-trainIndex, ]
 View(trainData)
 View(testData)
+
+#Building the model
+model1<- lm(AnnualIncomeNeeded ~JobInvolvement+JobSatisfaction+PerformanceRating+RelationshipSatisfaction+WorkLifeBalance+ YearsAtCompany+
+              YearsWithCurrManager+CurrentSalary  , data = trainData)
+summary(model1)
+
+#Visualize the model1
+qqnorm(resid(model1), main = "QQ Plot of Residuals")
+qqline(resid(model1), col = "blue", lwd = 2)
 ```
+![Model1](https://github.com/user-attachments/assets/b018fada-6768-4adf-b16d-f13db740f3f5)
+
+![Model 1 Visualization](https://github.com/user-attachments/assets/d914b97a-38d7-42f1-b610-f6ae9ece1436)
+
+CurrentSalary is by far the single biggest driver of “income needed.” A one‑dollar increase in current salary is associated with about $1.22 more “needed” income. PerformanceRating also has a large and significant effect. Other satisfaction/involvement metrics (job involvement, job satisfaction, relationship satisfaction, work‑life balance) do not appear to have a predictive power on the target variable.
+
+
 
