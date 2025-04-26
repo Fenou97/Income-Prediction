@@ -177,6 +177,43 @@ qqline(resid(model1), col = "blue", lwd = 2)
 ![Model 1 Visualization](https://github.com/user-attachments/assets/d914b97a-38d7-42f1-b610-f6ae9ece1436)
 
 CurrentSalary is by far the single biggest driver of “income needed.” A one‑dollar increase in current salary is associated with about $1.22 more “needed” income. PerformanceRating also has a large and significant effect. Other satisfaction/involvement metrics (job involvement, job satisfaction, relationship satisfaction, work‑life balance) do not appear to have a predictive power on the target variable.
+THe Q-Q plot shows reasonable normality with minor tail deviations, which is acceptable and the model looks good to proceed with. However, CurrentSalary is highly correlated with the target variable (Annual income Needed) revealing a potential data leakage. R² = 0.9877 is a sign that the model may be overfitting, performing unrealistically well during training, but poorly on unseen data. 
+
+### Target Transformation
+
+It seems AnnualIncomeNeeded might be tightly linked to CurrentSalary. If the response is self-reported (a survey question like "What do you think your income should be?"),people seem to base their answer directly on what they currently earn. The variable "DiffFromSalary" reveals the gap. DiffFromSalary = IncomeGap= AnnualIncomeNeeded - CurrentSalary. We will model the DiffFromSalary instead of AnnualIncomeNeeded.
+```R
+trainData$IncomeGap <- trainData$AnnualIncomeNeeded - trainData$CurrentSalary
+ ModelZ<- lm(IncomeGap ~ JobInvolvement + JobSatisfaction+PerformanceRating+RelationshipSatisfaction+WorkLifeBalance+ YearsAtCompany+
+               YearsWithCurrManager, data = trainData)
+ summary(ModelZ)
+```
+![Income Gap Model](https://github.com/user-attachments/assets/4c26ae5c-1ccb-47ab-a9b9-2d1af44898d9)
+
+R-squared: 0.1449: predictors explain ~14.5% of the variance in the income gap. That’s much better than before (0.0079), and shows there’s real signal in this model.
+
+F-statistic p-value < 2.2e-16: The model is statistically significant overall.
+
+PerformanceRating (Estimate: 9856.20, p < 2e-16): Employees with higher performance ratings report wanting ~$9,856 more in income, on average, all else being equal. This is strong and highly significant.
+
+Employees who perform better feel they deserve significantly more income compared to what they currently earn .The other variables (satisfaction, involvement) might affect how people feel about their job, but they don’t seem to translate into higher income expectations, at least not directly.
+
+### Interactions with Other Variables
+
+```R
+ggplot(trainData, aes(x = factor(PerformanceRating), y = IncomeGap)) +
+   geom_boxplot(aes(fill = factor(JobSatisfaction)), alpha = 0.6) +
+   labs(
+     title = "Income Gap by Performance Rating and Job Satisfaction",
+     x = "Performance Rating",
+     y = "Income Gap ($)",
+     fill = "Job Satisfaction"
+   ) +
+   theme_minimal()
+```
+![Interaction 1](https://github.com/user-attachments/assets/9156fd81-fd75-4476-bbd3-6f7c5dca8f3b)
+
+
 
 
 
