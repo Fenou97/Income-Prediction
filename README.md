@@ -179,7 +179,7 @@ qqline(resid(model1), col = "blue", lwd = 2)
 CurrentSalary is by far the single biggest driver of “income needed.” A one‑dollar increase in current salary is associated with about $1.22 more “needed” income. PerformanceRating also has a large and significant effect. Other satisfaction/involvement metrics (job involvement, job satisfaction, relationship satisfaction, work‑life balance) do not appear to have a predictive power on the target variable.
 THe Q-Q plot shows reasonable normality with minor tail deviations, which is acceptable and the model looks good to proceed with. However, CurrentSalary is highly correlated with the target variable (Annual income Needed) revealing a potential data leakage. R² = 0.9877 is a sign that the model may be overfitting, performing unrealistically well during training, but poorly on unseen data. 
 
-### Target Transformation
+- ### Target Transformation
 
 It seems AnnualIncomeNeeded might be tightly linked to CurrentSalary. If the response is self-reported (a survey question like "What do you think your income should be?"),people seem to base their answer directly on what they currently earn. The variable "DiffFromSalary" reveals the gap. DiffFromSalary = IncomeGap= AnnualIncomeNeeded - CurrentSalary. We will model the DiffFromSalary instead of AnnualIncomeNeeded.
 ```R
@@ -198,7 +198,9 @@ PerformanceRating (Estimate: 9856.20, p < 2e-16): Employees with higher performa
 
 Employees who perform better feel they deserve significantly more income compared to what they currently earn .The other variables (satisfaction, involvement) might affect how people feel about their job, but they don’t seem to translate into higher income expectations, at least not directly.
 
-### Interactions with Other Variables
+- ### Interactions with Other Variables
+
+Income Gap, Performance Rating, Job Satisfaction
 
 ```R
 ggplot(trainData, aes(x = factor(PerformanceRating), y = IncomeGap)) +
@@ -213,7 +215,58 @@ ggplot(trainData, aes(x = factor(PerformanceRating), y = IncomeGap)) +
 ```
 ![Interaction 1](https://github.com/user-attachments/assets/9156fd81-fd75-4476-bbd3-6f7c5dca8f3b)
 
+For both Performance Ratings, individuals with Job Satisfaction 1 and 2 tend to have slightly higher or similar medians compared to those with Satisfaction 3 and 4. This might hint that income gap doesn’t decrease much even if people are more satisfied. Performance seems to have a stronger effect.
 
+Income Gap, Performance Rating, Job Involvement  
 
+```R
+ggplot(trainData, aes(x = factor(PerformanceRating), y = IncomeGap)) +
+   geom_boxplot(aes(fill = factor(JobInvolvement)), alpha = 0.6) +
+   labs(
+     title = "Income Gap by Performance Rating and Job Involvement",
+     x = "Performance Rating",
+     y = "Income Gap ($)",
+     fill = "Job Involvement"
+   ) +
+   theme_minimal()
+```
 
+![Interraction 2](https://github.com/user-attachments/assets/23f6bb50-a648-490a-befa-70bbf7ede1b3)
+
+At Performance Rating 3, the differences in Income Gap across Job Involvement levels are small (medians are pretty close). But at Performance Rating 4, higher Job Involvement (3 and 4) tends to correlate with a larger Income Gap, hinting that involvement might be rewarded more when performance is already high.
+
+## Model Evaluation
+
+- ###  Predict the Income Gap and Reconstruct the Predicted Income
+
+```R
+# Predict the Income Gap
+ testData$PredictedGap <- predict(ModelZ, newdata = testData)
+# Reconstruct the Predicted Income
+ testData$PredictedAnnualIncome <- testData$CurrentSalary + testData$PredictedGap
+```
+ ###  Evaluations Metrics: RMSE (Root Mean Squared Error) and MAE (Mean Absolute Error)
+```R
+# Evaluation Metrics
+ install.packages("caret")  
+ library(caret)
+ RMSE(testData$AnnualIncomeNeeded, testData$PredictedAnnualIncome)
+ MAE(testData$AnnualIncomeNeeded, testData$PredictedAnnualIncome)
+ 
+ # visualization
+ ggplot(testData, aes(x = AnnualIncomeNeeded, y = PredictedAnnualIncome)) +
+   geom_point(alpha = 0.4, color = "steelblue") +
+   geom_abline(slope = 1, intercept = 0, color = "red", linetype = "dashed") +
+   labs(
+     title = "Predicted vs Actual Annual Income Needed",
+     x = "Actual",
+     y = "Predicted"
+   ) +
+   theme_minimal()
+```
+![Metrics](https://github.com/user-attachments/assets/43761bc2-9791-4b40-9cc8-5a937d7cf1cd)
+
+![Evaluation visual](https://github.com/user-attachments/assets/bfb50a3a-49f4-4c0c-bc6a-3fb484b48ad6)
+
+The average error (~$6.9K–$8.4K) is relatively small compared to the IQR of ~$72.8K and the full range of ~$145K. This suggests that the model is capturing general trends in how income is perceived.
 
