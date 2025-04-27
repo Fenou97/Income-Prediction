@@ -114,7 +114,7 @@ Salary$DiffFromSalary <- log(Salary$AnnualIncomeNeeded)
 
 Linear regression, which is supervised machine learning algorithm is used for predicting the desire income (continuous dependent variable) based on one or more independent variables (predictors) in the data set.
 
-- ### First Preliminarry Model: with all the variables in the data set
+- ### First Preliminary Model: with all the variables in the data set
 
 ```R
 #Build the model
@@ -245,7 +245,7 @@ At Performance Rating 3, the differences in Income Gap across Job Involvement le
 # Reconstruct the Predicted Income
  testData$PredictedAnnualIncome <- testData$CurrentSalary + testData$PredictedGap
 ```
- ###  Evaluations Metrics: RMSE (Root Mean Squared Error) and MAE (Mean Absolute Error)
+- ###  Evaluations Metrics: RMSE (Root Mean Squared Error) and MAE (Mean Absolute Error)
 ```R
 # Evaluation Metrics
  install.packages("caret")  
@@ -273,4 +273,4 @@ The average error (~$6.9K–$8.4K) is relatively small compared to the IQR of ~$
 The dots are clustered tightly around the red dashed line, suggesting that the model’s predictions are very accurate. The graph shows that the model does a great job predicting annual income needed, predictions closely match actual values, with only small errors. 
 
 ## Limitations
-Model shows solid average performance (5–6% error), but real-world deployment will demand a guard against bias, tail mis-predictions. It will be better to try a more powerful model (like a random forest or gradient boosting) to see if we can beat that ~$7K error?
+Model shows solid average performance (5–6% error), but real-world deployment will demand a guard against bias, tail mis-predictions. It will be better to try a more powerful model (like a random forest or gradient boosting) to see if we can beat that ~$7K error.
