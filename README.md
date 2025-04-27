@@ -1,5 +1,16 @@
 # Annual Income Prediction
 
+## Table of contents
+
+- [Project Overview](#project-overview)
+- [Research Questions](#research-questions)
+- [Data Sources](#data-sources)
+- [Tools](#tools)
+- [Exploratory Data Analysis](#exploratory-data-analysis)
+- [Data Preparation](#data-preparation)
+- [Model Buidling Plan](#model-buidling-plan)
+- [Model Evaluation](#model-evaluation)
+- [Limitations](#limitations)
 ## Project Overview
 
 By engaging stakeholders, we clarified that high employee turnover rates are costly, and understanding the salary range employees would expect in order to stay could improve retention. "What salary predicts employee retention based on historical data?"
