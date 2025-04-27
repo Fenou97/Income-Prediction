@@ -12,6 +12,9 @@
   
     [Correlation Analysis](#correlation-analysis)
 - [Data Preparation](#data-preparation)
+
+   [Data Cleaning/Checking for errors](#data-cleaning-/checking-for-errors)
+  
 - [Model Buidling Plan](#model-buidling-plan)
 - [Model Evaluation](#model-evaluation)
 - [Limitations](#limitations)
