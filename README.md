@@ -7,17 +7,11 @@
 - [Data Sources](#data-sources)
 - [Tools](#tools)
 - [Exploratory Data Analysis](#exploratory-data-analysis)
-  
-    [Data Summmary and Data Distribution](#data-summmary-and-data-distribution)
-  
-    [Correlation Analysis](#correlation-analysis)
 - [Data Preparation](#data-preparation)
-
-   [Data Cleaning/Checking for errors](#data-cleaning-checking-for-errors)
-  
 - [Model Buidling Plan](#model-buidling-plan)
 - [Model Evaluation](#model-evaluation)
 - [Limitations](#limitations)
+  
 ## Project Overview
 
 By engaging stakeholders, we clarified that high employee turnover rates are costly, and understanding the salary range employees would expect in order to stay could improve retention. "What salary predicts employee retention based on historical data?"
