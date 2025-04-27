@@ -7,6 +7,8 @@
 - [Data Sources](#data-sources)
 - [Tools](#tools)
 - [Exploratory Data Analysis](#exploratory-data-analysis)
+  
+    [Data Summmary and Data Distribution](#data-summmary-and-data-distribution)
 - [Data Preparation](#data-preparation)
 - [Model Buidling Plan](#model-buidling-plan)
 - [Model Evaluation](#model-evaluation)
