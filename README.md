@@ -9,6 +9,8 @@
 - [Exploratory Data Analysis](#exploratory-data-analysis)
   
     [Data Summmary and Data Distribution](#data-summmary-and-data-distribution)
+  
+    [Correlation Analysis](#correlation-analysis)
 - [Data Preparation](#data-preparation)
 - [Model Buidling Plan](#model-buidling-plan)
 - [Model Evaluation](#model-evaluation)
