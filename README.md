@@ -266,7 +266,11 @@ At Performance Rating 3, the differences in Income Gap across Job Involvement le
 ```
 ![Metrics](https://github.com/user-attachments/assets/43761bc2-9791-4b40-9cc8-5a937d7cf1cd)
 
+The average error (~$6.9K–$8.4K) is relatively small compared to the IQR of ~$72.8K and the full range of ~$145K. This suggests that the model is capturing general trends in how income is perceived. RMSE (8403.822) is 6.12% of the median (137,280) and 6.15% of the mean (136,593). MAE (6936.483) is 5.05% of the median (137,280) and 5.08% of the mean (136,593).
+
 ![Evaluation visual](https://github.com/user-attachments/assets/bfb50a3a-49f4-4c0c-bc6a-3fb484b48ad6)
 
-The average error (~$6.9K–$8.4K) is relatively small compared to the IQR of ~$72.8K and the full range of ~$145K. This suggests that the model is capturing general trends in how income is perceived.
+The dots are clustered tightly around the red dashed line, suggesting that the model’s predictions are very accurate. The graph shows that the model does a great job predicting annual income needed, predictions closely match actual values, with only small errors. 
 
+## Limitations
+Model shows solid average performance (5–6% error), but real-world deployment will demand a guard against bias, tail mis-predictions. It will be better to try a more powerful model (like a random forest or gradient boosting) to see if we can beat that ~$7K error?
