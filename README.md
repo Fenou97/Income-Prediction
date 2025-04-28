@@ -257,7 +257,7 @@ At Performance Rating 3, the differences in Income Gap across Job Involvement le
 # Reconstruct the Predicted Income
  testData$PredictedAnnualIncome <- testData$CurrentSalary + testData$PredictedGap
 ```
-- ###  Evaluations Metrics: RMSE (Root Mean Squared Error) and MAE (Mean Absolute Error)
+- ###  Evaluation Metrics: RMSE (Root Mean Squared Error) and MAE (Mean Absolute Error)
 ```R
 # Evaluation Metrics
  install.packages("caret")  
