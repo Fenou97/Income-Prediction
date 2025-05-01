@@ -9,8 +9,7 @@
 - [Exploratory Data Analysis](#exploratory-data-analysis)
 - [Data Preparation](#data-preparation)
 - [Model Buidling: Linear Regression](#model-buidling-linear-regression)
-- [Model Evaluation](#model-evaluation)
-- [Limitations](#limitations)
+- [Model Buidling: Random Forest](#model-buidling-Random-Forest)
   
 ## Project Overview
 
@@ -247,9 +246,9 @@ ggplot(trainData, aes(x = factor(PerformanceRating), y = IncomeGap)) +
 
 At Performance Rating 3, the differences in Income Gap across Job Involvement levels are small (medians are pretty close). But at Performance Rating 4, higher Job Involvement (3 and 4) tends to correlate with a larger Income Gap, hinting that involvement might be rewarded more when performance is already high.
 
-## Model Evaluation
+### Model Evaluation
 
-- ###  Predict the Income Gap and Reconstruct the Predicted Income
+- Predict the Income Gap and Reconstruct the Predicted Income
 
 ```R
 # Predict the Income Gap
@@ -257,7 +256,7 @@ At Performance Rating 3, the differences in Income Gap across Job Involvement le
 # Reconstruct the Predicted Income
  testData$PredictedAnnualIncome <- testData$CurrentSalary + testData$PredictedGap
 ```
-- ###  Evaluation Metrics: RMSE (Root Mean Squared Error) and MAE (Mean Absolute Error)
+- Evaluation Metrics: RMSE (Root Mean Squared Error) and MAE (Mean Absolute Error)
 ```R
 # Evaluation Metrics
  install.packages("caret")  
@@ -284,5 +283,6 @@ The average error (~$6.9K–$8.4K) is relatively small compared to the IQR of ~$
 
 The dots are clustered tightly around the red dashed line, suggesting that the model’s predictions are very accurate. The graph shows that the model does a great job predicting annual income needed, predictions closely match actual values, with only small errors. 
 
-## Limitations
 Model shows solid average performance (5–6% error), but real-world deployment will demand a guard against bias, tail mis-predictions. It will be better to try a more powerful model (like a random forest or gradient boosting) to see if we can beat that ~$7K error.
+
+## Model Buidling: Random Forest
