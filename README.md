@@ -286,3 +286,67 @@ The dots are clustered tightly around the red dashed line, suggesting that the m
 Model shows solid average performance (5–6% error), but real-world deployment will demand a guard against bias, tail mis-predictions. It will be better to try a more powerful model (like a random forest or gradient boosting) to see if we can beat that ~$7K error.
 
 ## Model Buidling: Random Forest
+
+- ### First, install and load the randomForest package
+
+```R
+install.packages("randomForest")  
+ library(randomForest)
+```
+- ### Fit the Random Forest Model
+
+```R
+rf_model <- randomForest(
+  IncomeGap ~ PerformanceRating * JobSatisfaction +
+    JobInvolvement + RelationshipSatisfaction + WorkLifeBalance +
+    YearsAtCompany + YearsWithCurrManager,
+  data = trainData,
+  ntree = 500,    # number of trees
+  mtry = 3,       # number of variables randomly sampled at each split
+  importance = TRUE
+)
+```
+
+- ###  Predict on Test Data
+
+```R
+# Predict the income gap
+testData$PredictedGap_rf <- predict(rf_model, newdata = testData)
+# Reconstruct the predicted salary
+testData$PredictedAnnualIncome_rf <- testData$CurrentSalary + testData$PredictedGap_rf
+```
+
+- ###  Evaluate the Random Forest Model
+```R
+> RMSE(testData$AnnualIncomeNeeded, testData$PredictedAnnualIncome_rf)
+[1] 8631.792
+>  MAE(testData$AnnualIncomeNeeded, testData$PredictedAnnualIncome_rf)
+[1] 7132.777
+varImpPlot(rf_model)
+```
+![Random forest 1](https://github.com/user-attachments/assets/51717dca-a6ae-4967-8535-985bfac7a65e)
+
+Based on the two different metrics (Mean Squared Error Increase, Increase in Node Purity), the Random Forest model strongly suggest that PerformanceRating is the primary driver of predicted income expectations. Most of the other variables have weak or negligible predictive value.
+
+###  Build a Simplified Random Forest Model
+
+```R
+ #Select top 3 features
+top_features <- c("PerformanceRating", "YearsAtCompany", "YearsWithCurrManager")
+
+# Train simplified random forest
+rf_model_simple <- randomForest(
+  IncomeGap ~ ., 
+  data = trainData[, c(top_features, "IncomeGap")],
+  importance = TRUE
+)
+# Predict
+testData$PredictedGap_simple <- predict(rf_model_simple, testData[, top_features])
+testData$PredictedAnnualIncome_simple <- testData$CurrentSalary + testData$PredictedGap_simple
+# Evaluate
+> RMSE(testData$AnnualIncomeNeeded, testData$PredictedAnnualIncome_simple)
+[1] 8015.395
+> MAE(testData$AnnualIncomeNeeded, testData$PredictedAnnualIncome_simple)
+[1] 7072.831
+```
+
