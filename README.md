@@ -8,7 +8,7 @@
 - [Tools](#tools)
 - [Exploratory Data Analysis](#exploratory-data-analysis)
 - [Data Preparation](#data-preparation)
-- [Model Buidling: Linear Regression](#model-buidling-:linear-regression)
+- [Model Buidling: Linear Regression](#model-buidling-linear-regression)
 - [Model Evaluation](#model-evaluation)
 - [Limitations](#limitations)
   
