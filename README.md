@@ -8,7 +8,7 @@
 - [Tools](#tools)
 - [Exploratory Data Analysis](#exploratory-data-analysis)
 - [Data Preparation](#data-preparation)
-- [Model Buidling Plan](#model-buidling-plan)
+- [Model Buidling: Linear Regression](#model-buidling-:linear-regression)
 - [Model Evaluation](#model-evaluation)
 - [Limitations](#limitations)
   
@@ -122,7 +122,7 @@ Salary$DiffFromSalary <- log(Salary$AnnualIncomeNeeded)
 ```
 ![Data Normality](https://github.com/user-attachments/assets/f685a13e-3254-4d35-83cc-15a748435f98)
 
-## Model Buidling Plan
+## Model Buidling: Linear Regression
 
 Linear regression, which is supervised machine learning algorithm is used for predicting the desire income (continuous dependent variable) based on one or more independent variables (predictors) in the data set.
 
