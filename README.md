@@ -10,6 +10,8 @@
 - [Data Preparation](#data-preparation)
 - [Model Buidling: Linear Regression](#model-buidling-linear-regression)
 - [Model Buidling: Random Forest](#model-buidling-Random-Forest)
+- [Model Buidling: XGBoost](#model-buidling-XGBoost)
+  
   
 ## Project Overview
 
