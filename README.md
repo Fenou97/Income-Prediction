@@ -286,7 +286,7 @@ ggplot(trainData, aes(x = factor(PerformanceRating), y = IncomeGap)) +
 
 **The dots are clustered tightly around the red dashed line, suggesting that the model’s predictions are very accurate. The graph shows that the model does a great job predicting annual income needed, predictions closely match actual values, with only small errors**. 
 
-**Model shows solid average performance (5–6% error), but real-world deployment will demand a guard against bias, tail mis-predictions. It will be better to try a more powerful model (like a random forest or gradient boosting) to see if we can beat that ~$7K error**.
+**Model shows solid average performance (5–6% error), but real-world deployment will demand a guard against bias, tail mis-predictions. It will be better to try a more powerful model (like a random forest or gradient boosting) to see if we can beat the error**.
 
 ## Model Buidling: Random Forest
 
@@ -356,7 +356,7 @@ testData$PredictedAnnualIncome_simple <- testData$CurrentSalary + testData$Predi
 [1] 7072.831
 ```
 
-**Removing 4 low-importance features actually improved RMSE — this suggests they were adding noise. The simplified model is both more accurate and interpretable, using just PerformanceRating, YearsAtCompany, YearsWithCurrManager.**
+**Removing 4 low-importance features actually improved RMSE. This suggests they were adding noise. The simplified model is both more accurate and interpretable, using just PerformanceRating, YearsAtCompany, YearsWithCurrManager.**
 
 ## Model Buidling: XGBoost model
 
