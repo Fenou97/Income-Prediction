@@ -64,7 +64,7 @@ ggplot(Salary1, aes(x = Salary1$AnnualIncomeNeeded, y = Salary1$CurrentSalary)) 
 ![Correlation 2](https://github.com/user-attachments/assets/70e29231-bda9-4098-8d92-fe91cdb21d27)
 ![Correlation 3](https://github.com/user-attachments/assets/a124f2bc-f771-41d0-b5aa-7d1dabb5bf30)
 
-Through correlation analysis, we identified variables that are highly correlated to avoid multicollinearity in the model. For instance, the variables Years at the company and Years Current Role are  highly correlated. So we must include one of them in the model to avoid multicollinearity. On the other hand, the correlation analysis has helped identifying variables that are correlated with the target variable (Annual Income Needed). For example, there is a positive correlation between  Annual Income Needed (Target variable) and Current Salary. Variables highly correlated with the target variable are likely to be good predictors. Identifying them will help prioritize which features to include in the model.
+**Through correlation analysis, we identified variables that are highly correlated to avoid multicollinearity in the model. For instance, the variables Years at the company and Years Current Role are  highly correlated. So we must include one of them in the model to avoid multicollinearity. On the other hand, the correlation analysis has helped identifying variables that are correlated with the target variable (Annual Income Needed). For example, there is a positive correlation between  Annual Income Needed (Target variable) and Current Salary. Variables highly correlated with the target variable are likely to be good predictors. Identifying them will help prioritize which features to include in the model.**
 
 ## Data Preparation
 - ### Data Cleaning/Checking for errors
@@ -92,7 +92,8 @@ NAs introduced by coercion
 Warning message:
 NAs introduced by coercion
 ```
-There is an issue concerning the data that is preventing the conversion. So we remove Special Characters (e.g., $ or ,), Trim Whitespace, Handle Empty or Non-Numeric Values and finally convert the variables into numeric.
+**There is an issue concerning the data that is preventing the conversion. So we remove Special Characters (e.g., $ or ,) and finally convert the variables into numeric.**
+
 ```R
 # Remove Special Characters (e.g., $ or ,):
 Salary$AnnualIncomeNeeded <- gsub("[\\$,]", "", Salary$AnnualIncomeNeeded)
@@ -152,7 +153,7 @@ qqline(resid(model), col = "blue", lwd = 2)
 
 ![First Model Evaluation](https://github.com/user-attachments/assets/077ede83-0fb3-481c-8028-2242ec700be5)
 
-The model outputs are red flag for biases and non-linearity in the dataset. The results of the model reveals that there are too many predictors in the dataset, what is true. With too many features, the data points become sparse making it harder to find meaningful relationships. The model appears to have an extremely high goodness of fit, but it is likely overfitting . Residual Standard Error (RSE: 7.717e-11) is very close to zero, meaning the residuals (errors) are extremely small. R² of 1 means the model explains 100% of the variance in the dependent variable (too good to be true). A huge F-statistic (1.648e+31) with an extremely small p-value (<2.2e-16) suggests that at least one of the predictors is statistically significant. 
+**The model outputs are red flag for biases and non-linearity in the dataset. The results of the model reveals that there are too many predictors in the dataset, what is true. With too many features, the data points become sparse making it harder to find meaningful relationships. The model appears to have an extremely high goodness of fit, but it is likely overfitting . Residual Standard Error (RSE: 7.717e-11) is very close to zero, meaning the residuals (errors) are extremely small. R² of 1 means the model explains 100% of the variance in the dependent variable (too good to be true). A huge F-statistic (1.648e+31) with an extremely small p-value (<2.2e-16) suggests that at least one of the predictors is statistically significant**. 
 
 - ### Applying Variance Inflation Factor to remove irrelevant factors
 ```R
@@ -163,7 +164,7 @@ print(vif_values)
 ```
 ![Variance Indicator factor](https://github.com/user-attachments/assets/55423de8-5408-4bd7-abd9-a52c67e4dc0d)
 
-We have typically removed features with high VIF (Variance Inflation Factor), as these indicate multicollinearity. A common threshold to flag high multicollinearity is a VIF greater than 5 or 10. PercentSalaryHike: VIF = 7.25 (indicates potential multicollinearity), TotalWorkingYears: VIF = 4.82 (moderate, but could be considered for further inspection), YearsAtCompany: VIF = 4.48 (moderate), YearsInCurrentRole: VIF = 2.68 (moderate, but not concerning), YearsWithCurrManager: VIF = 2.77 (moderate), DiffFromSalary: VIF = 12.49 (high and suggests significant multicollinearity), CurrentSalary: VIF = 9.62 (high and suggests significant multicollinearity). By eliminating irrelevant features, the model is likely to become simpler and less prone to overfitting, improving generalization to unseen data. Fewer predictors can lead to better predictive performance.
+**We have typically removed features with high VIF (Variance Inflation Factor), as these indicate multicollinearity. A common threshold to flag high multicollinearity is a VIF greater than 5 or 10. PercentSalaryHike: VIF = 7.25 (indicates potential multicollinearity), TotalWorkingYears: VIF = 4.82 (moderate, but could be considered for further inspection), YearsAtCompany: VIF = 4.48 (moderate), YearsInCurrentRole: VIF = 2.68 (moderate, but not concerning), YearsWithCurrManager: VIF = 2.77 (moderate), DiffFromSalary: VIF = 12.49 (high and suggests significant multicollinearity), CurrentSalary: VIF = 9.62 (high and suggests significant multicollinearity). By eliminating irrelevant features, the model is likely to become simpler and less prone to overfitting, improving generalization to unseen data. Fewer predictors can lead to better predictive performance**
   
 - ### 2nd Model with relevant features
 ```R
@@ -189,8 +190,8 @@ qqline(resid(model1), col = "blue", lwd = 2)
 
 ![Model 1 Visualization](https://github.com/user-attachments/assets/d914b97a-38d7-42f1-b610-f6ae9ece1436)
 
-CurrentSalary is by far the single biggest driver of “income needed.” A one‑dollar increase in current salary is associated with about $1.22 more “needed” income. PerformanceRating also has a large and significant effect. Other satisfaction/involvement metrics (job involvement, job satisfaction, relationship satisfaction, work‑life balance) do not appear to have a predictive power on the target variable.
-THe Q-Q plot shows reasonable normality with minor tail deviations, which is acceptable and the model looks good to proceed with. However, CurrentSalary is highly correlated with the target variable (Annual income Needed) revealing a potential data leakage. R² = 0.9877 is a sign that the model may be overfitting, performing unrealistically well during training, but poorly on unseen data. 
+**CurrentSalary is by far the single biggest driver of “income needed.” A one‑dollar increase in current salary is associated with about $1.22 more “needed” income. PerformanceRating also has a large and significant effect. Other satisfaction/involvement metrics (job involvement, job satisfaction, relationship satisfaction, work‑life balance) do not appear to have a predictive power on the target variable.
+THe Q-Q plot shows reasonable normality with minor tail deviations, which is acceptable and the model looks good to proceed with. However, CurrentSalary is highly correlated with the target variable (Annual income Needed) revealing a potential data leakage. R² = 0.9877 is a sign that the model may be overfitting, performing unrealistically well during training, but poorly on unseen data.**
 
 - ### Target Transformation
 
@@ -209,11 +210,11 @@ F-statistic p-value < 2.2e-16: The model is statistically significant overall.
 
 PerformanceRating (Estimate: 9856.20, p < 2e-16): Employees with higher performance ratings report wanting ~$9,856 more in income, on average, all else being equal. This is strong and highly significant.
 
-Employees who perform better feel they deserve significantly more income compared to what they currently earn .The other variables (satisfaction, involvement) might affect how people feel about their job, but they don’t seem to translate into higher income expectations, at least not directly.
+**Employees who perform better feel they deserve significantly more income compared to what they currently earn .The other variables (satisfaction, involvement) might affect how people feel about their job, but they don’t seem to translate into higher income expectations, at least not directly.**
 
 - ### Interactions with Other Variables
 
-Income Gap, Performance Rating, Job Satisfaction
+*Income Gap, Performance Rating, Job Satisfaction*
 
 ```R
 ggplot(trainData, aes(x = factor(PerformanceRating), y = IncomeGap)) +
@@ -230,7 +231,7 @@ ggplot(trainData, aes(x = factor(PerformanceRating), y = IncomeGap)) +
 
 For both Performance Ratings, individuals with Job Satisfaction 1 and 2 tend to have slightly higher or similar medians compared to those with Satisfaction 3 and 4. This might hint that income gap doesn’t decrease much even if people are more satisfied. Performance seems to have a stronger effect.
 
-Income Gap, Performance Rating, Job Involvement  
+*Income Gap, Performance Rating, Job Involvement* 
 
 ```R
 ggplot(trainData, aes(x = factor(PerformanceRating), y = IncomeGap)) +
@@ -246,7 +247,7 @@ ggplot(trainData, aes(x = factor(PerformanceRating), y = IncomeGap)) +
 
 ![Interraction 2](https://github.com/user-attachments/assets/23f6bb50-a648-490a-befa-70bbf7ede1b3)
 
-At Performance Rating 3, the differences in Income Gap across Job Involvement levels are small (medians are pretty close). But at Performance Rating 4, higher Job Involvement (3 and 4) tends to correlate with a larger Income Gap, hinting that involvement might be rewarded more when performance is already high.
+**At Performance Rating 3, the differences in Income Gap across Job Involvement levels are small (medians are pretty close). But at Performance Rating 4, higher Job Involvement (3 and 4) tends to correlate with a larger Income Gap, hinting that involvement might be rewarded more when performance is already high**.
 
 ### Model Evaluation
 
@@ -279,13 +280,13 @@ At Performance Rating 3, the differences in Income Gap across Job Involvement le
 ```
 ![Metrics](https://github.com/user-attachments/assets/43761bc2-9791-4b40-9cc8-5a937d7cf1cd)
 
-The average error (~$6.9K–$8.4K) is relatively small compared to the IQR of ~$72.8K and the full range of ~$145K. This suggests that the model is capturing general trends in how income is perceived. RMSE (8403.822) is 6.12% of the median (137,280) and 6.15% of the mean (136,593). MAE (6936.483) is 5.05% of the median (137,280) and 5.08% of the mean (136,593).
+**The average error (~$6.9K–$8.4K) is relatively small compared to the IQR of ~$72.8K and the full range of ~$145K. This suggests that the model is capturing general trends in how income is perceived. RMSE (8403.822) is 6.12% of the median (137,280) and 6.15% of the mean (136,593). MAE (6936.483) is 5.05% of the median (137,280) and 5.08% of the mean (136,593)**.
 
 ![Evaluation visual](https://github.com/user-attachments/assets/bfb50a3a-49f4-4c0c-bc6a-3fb484b48ad6)
 
-The dots are clustered tightly around the red dashed line, suggesting that the model’s predictions are very accurate. The graph shows that the model does a great job predicting annual income needed, predictions closely match actual values, with only small errors. 
+**The dots are clustered tightly around the red dashed line, suggesting that the model’s predictions are very accurate. The graph shows that the model does a great job predicting annual income needed, predictions closely match actual values, with only small errors**. 
 
-Model shows solid average performance (5–6% error), but real-world deployment will demand a guard against bias, tail mis-predictions. It will be better to try a more powerful model (like a random forest or gradient boosting) to see if we can beat that ~$7K error.
+**Model shows solid average performance (5–6% error), but real-world deployment will demand a guard against bias, tail mis-predictions. It will be better to try a more powerful model (like a random forest or gradient boosting) to see if we can beat that ~$7K error**.
 
 ## Model Buidling: Random Forest
 
@@ -326,9 +327,12 @@ testData$PredictedAnnualIncome_rf <- testData$CurrentSalary + testData$Predicted
 [1] 7132.777
 varImpPlot(rf_model)
 ```
+
+**Surprisingly, the random forest model performed slightly worse than the linear regression. This suggests that the data may not have strong nonlinearities or interactions that a random forest could exploit better than a linear model.**
+
 ![Random forest 1](https://github.com/user-attachments/assets/51717dca-a6ae-4967-8535-985bfac7a65e)
 
-Based on the two different metrics (Mean Squared Error Increase, Increase in Node Purity), the Random Forest model strongly suggest that PerformanceRating is the primary driver of predicted income expectations. Most of the other variables have weak or negligible predictive value.
+**Based on the two different metrics (Mean Squared Error Increase, Increase in Node Purity), the Random Forest model strongly suggest that PerformanceRating is the primary driver of predicted income expectations. Most of the other variables have weak or negligible predictive value.**
 
 ###  Build a Simplified Random Forest Model
 
@@ -351,4 +355,66 @@ testData$PredictedAnnualIncome_simple <- testData$CurrentSalary + testData$Predi
 > MAE(testData$AnnualIncomeNeeded, testData$PredictedAnnualIncome_simple)
 [1] 7072.831
 ```
+
+**Removing 4 low-importance features actually improved RMSE — this suggests they were adding noise. The simplified model is both more accurate and interpretable, using just PerformanceRating, YearsAtCompany, YearsWithCurrManager.**
+
+## Model Buidling: XGBoost model
+
+XGBoost (Extreme Gradient Boosting) is a powerful and efficient implementation of gradient boosted decision trees. It builds an ensemble (collection) of decision trees sequentially, where each new tree corrects the errors made by the previous ones. It might help us capture non-linear patterns (complext interactions) that can affect Income.
+
+- ### First, Install & Load Required Packages
+
+```R
+install.packages("xgboost")
+ install.packages("Matrix")
+ library(xgboost)
+ library(Matrix)
+```
+
+- ### Select features and label
+
+```R
+# Select features
+ features <- c("PerformanceRating",
+               "YearsAtCompany", "YearsWithCurrManager")
+ 
+ # Create design matrix (no intercept)
+ train_matrix <- model.matrix(~ . -1, data = trainData[, features])
+ test_matrix <- model.matrix(~ . -1, data = testData[, features])
+ 
+ # Labels
+ train_label <- trainData$IncomeGap
+ test_label <- testData$AnnualIncomeNeeded
+```
+ 
+ - ### Train XGBoost Model
+
+```R
+ xgb_model <- xgboost(
+ data = train_matrix,
+ label = train_label,
+ nrounds = 100,
+ objective = "reg:squarederror",
+ verbose = 0
+ )
+ ```
+
+- ### Predict the gap
+```R
+# Make predictions
+ predicted_gap_xgb <- predict(xgb_model, test_matrix)
+ 
+ # Reconstruct predicted income
+ testData$PredictedAnnualIncome_xgb <- testData$CurrentSalary + predicted_gap_xgb
+  ```
+- ### Evaluate
+ ```R 
+ RMSE(test_label, testData$PredictedAnnualIncome_xgb)
+[1] 11548.3
+MAE(test_label, testData$PredictedAnnualIncome_xgb)
+[1] 9573.138
+  ```
+
+**XGBoost performed the worst on this task. That might sound surprising, but it's actually a strong signal.**
+
 
