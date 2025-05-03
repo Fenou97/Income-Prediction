@@ -423,7 +423,7 @@ MAE(test_label, testData$PredictedAnnualIncome_xgb)
 |---------|---------|---------|---------|
 |Linear Regression| All 7 original predictors|8,403.82|6,936.48|
 |Random Forest (full)|All 7 original predictors|8,632.20|7,133.37|
-|Random Forest (simplified)|Top 3 predictors (PerformanceRating, YearsAtCompany, YearsWithCurrManager)|8,015.40|7,072.83|
+|Random Forest (simplified)|Top 3 predictors (PerformanceRating, YearsAtCompany, YearsWithCurrManager)|**8,015.40**|**7,072.83**|
 |XGBoost|All 7 original predictors|11,548.30|9,573.14|
 
 **The Simplified Random Forest model achieved the lowest RMSE and a competitive MAE, indicating it provides the most accurate predictions among the models tested. It balances accuracy, interpretability, and efficiency. Great for real-world application and stakeholder trust.**
