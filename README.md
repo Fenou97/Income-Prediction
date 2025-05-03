@@ -10,7 +10,7 @@
 - [Data Preparation](#data-preparation)
 - [Model Buidling: Linear Regression](#model-buidling-linear-regression)
 - [Model Buidling: Random Forest](#model-buidling-Random-Forest)
-- [Model Buidling: XGBoost](#model-buidling-XGBoost)
+- [Model Buidling: XGBoost](#model-buidling-xgboost)
   
   
 ## Project Overview
@@ -204,11 +204,11 @@ trainData$IncomeGap <- trainData$AnnualIncomeNeeded - trainData$CurrentSalary
 ```
 ![Income Gap Model](https://github.com/user-attachments/assets/4c26ae5c-1ccb-47ab-a9b9-2d1af44898d9)
 
-R-squared: 0.1449: predictors explain ~14.5% of the variance in the income gap. That’s much better than before (0.0079), and shows there’s real signal in this model.
+**R-squared: 0.1449: predictors explain ~14.5% of the variance in the income gap. That’s much better than before (0.0079), and shows there’s real signal in this model.**
 
-F-statistic p-value < 2.2e-16: The model is statistically significant overall.
+**F-statistic p-value < 2.2e-16: The model is statistically significant overall.**
 
-PerformanceRating (Estimate: 9856.20, p < 2e-16): Employees with higher performance ratings report wanting ~$9,856 more in income, on average, all else being equal. This is strong and highly significant.
+**PerformanceRating (Estimate: 9856.20, p < 2e-16): Employees with higher performance ratings report wanting ~$9,856 more in income, on average, all else being equal. This is strong and highly significant.**
 
 **Employees who perform better feel they deserve significantly more income compared to what they currently earn .The other variables (satisfaction, involvement) might affect how people feel about their job, but they don’t seem to translate into higher income expectations, at least not directly.**
 
@@ -229,7 +229,7 @@ ggplot(trainData, aes(x = factor(PerformanceRating), y = IncomeGap)) +
 ```
 ![Interaction 1](https://github.com/user-attachments/assets/9156fd81-fd75-4476-bbd3-6f7c5dca8f3b)
 
-For both Performance Ratings, individuals with Job Satisfaction 1 and 2 tend to have slightly higher or similar medians compared to those with Satisfaction 3 and 4. This might hint that income gap doesn’t decrease much even if people are more satisfied. Performance seems to have a stronger effect.
+**For both Performance Ratings, individuals with Job Satisfaction 1 and 2 tend to have slightly higher or similar medians compared to those with Satisfaction 3 and 4. This might hint that income gap doesn’t decrease much even if people are more satisfied. Performance seems to have a stronger effect.**
 
 *Income Gap, Performance Rating, Job Involvement* 
 
@@ -417,4 +417,13 @@ MAE(test_label, testData$PredictedAnnualIncome_xgb)
 
 **XGBoost performed the worst on this task. That might sound surprising, but it's actually a strong signal.**
 
+## Model Performance Comparison: Annual Income Prediction
 
+| Model| Features Used| RMSE ($)| MAE ($)|
+|---------|---------|---------|---------|
+|Linear Regression| All 7 original predictors|8,403.82|6,936.48|
+|Random Forest (full)|All 7 original predictors|8,632.20|7,133.37|
+|Random Forest (simplified)|Top 3 predictors (PerformanceRating, YearsAtCompany, YearsWithCurrManager)|8,015.40|7,072.83|
+|XGBoost|All 7 original predictors|11,548.30|9,573.14|
+
+**The Simplified Random Forest model achieved the lowest RMSE and a competitive MAE, indicating it provides the most accurate predictions among the models tested. It balances accuracy, interpretability, and efficiency. Great for real-world application and stakeholder trust.**
